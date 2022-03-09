@@ -56,7 +56,7 @@ public class Day implements Parcelable{
                 this.mMonth,
                 this.mDay});
     }
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+    public static final Creator CREATOR = new Creator() {
         public Day createFromParcel(Parcel in) {
             return new Day(in);
         }

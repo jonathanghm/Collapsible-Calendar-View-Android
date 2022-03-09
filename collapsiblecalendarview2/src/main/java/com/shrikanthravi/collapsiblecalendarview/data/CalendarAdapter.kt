@@ -11,6 +11,7 @@ import com.shrikanthravi.collapsiblecalendarview.R
 
 import java.util.ArrayList
 import java.util.Calendar
+import kotlin.math.ceil
 
 /**
  * Created by shrikanthravi on 06/03/18.
@@ -18,7 +19,7 @@ import java.util.Calendar
 
 class CalendarAdapter(context: Context, cal: Calendar) {
     private var mFirstDayOfWeek = 0
-    var calendar: Calendar
+    var calendar: Calendar = cal.clone() as Calendar
     private val mInflater: LayoutInflater
 
     private val mItemList = ArrayList<Day>()
@@ -30,7 +31,6 @@ class CalendarAdapter(context: Context, cal: Calendar) {
         get() = mItemList.size
 
     init {
-        this.calendar = cal.clone() as Calendar
         this.calendar.set(Calendar.DAY_OF_MONTH, 1)
 
         mInflater = LayoutInflater.from(context)
@@ -70,37 +70,41 @@ class CalendarAdapter(context: Context, cal: Calendar) {
 
         // generate day list
         val offset = 0 - (firstDayOfWeek - mFirstDayOfWeek) + 1
-        val length = Math.ceil(((lastDayOfMonth - offset + 1).toFloat() / 7).toDouble()).toInt() * 7
+        val length = ceil(((lastDayOfMonth - offset + 1).toFloat() / 7).toDouble()).toInt() * 7
         for (i in offset until length + offset) {
             val numYear: Int
             val numMonth: Int
             val numDay: Int
 
             val tempCal = Calendar.getInstance()
-            if (i <= 0) { // prev month
-                if (month == 0) {
-                    numYear = year - 1
-                    numMonth = 11
-                } else {
-                    numYear = year
-                    numMonth = month - 1
+            when {
+                i <= 0 -> { // prev month
+                    if (month == 0) {
+                        numYear = year - 1
+                        numMonth = 11
+                    } else {
+                        numYear = year
+                        numMonth = month - 1
+                    }
+                    tempCal.set(numYear, numMonth, 1)
+                    numDay = tempCal.getActualMaximum(Calendar.DAY_OF_MONTH) + i
                 }
-                tempCal.set(numYear, numMonth, 1)
-                numDay = tempCal.getActualMaximum(Calendar.DAY_OF_MONTH) + i
-            } else if (i > lastDayOfMonth) { // next month
-                if (month == 11) {
-                    numYear = year + 1
-                    numMonth = 0
-                } else {
-                    numYear = year
-                    numMonth = month + 1
+                i > lastDayOfMonth -> { // next month
+                    if (month == 11) {
+                        numYear = year + 1
+                        numMonth = 0
+                    } else {
+                        numYear = year
+                        numMonth = month + 1
+                    }
+                    tempCal.set(numYear, numMonth, 1)
+                    numDay = i - lastDayOfMonth
                 }
-                tempCal.set(numYear, numMonth, 1)
-                numDay = i - lastDayOfMonth
-            } else {
-                numYear = year
-                numMonth = month
-                numDay = i
+                else -> {
+                    numYear = year
+                    numMonth = month
+                    numDay = i
+                }
             }
 
             val day = Day(numYear, numMonth, numDay)
@@ -117,8 +121,8 @@ class CalendarAdapter(context: Context, cal: Calendar) {
             for (j in mEventList.indices) {
                 val event = mEventList[j]
                 if (day.year == event.year
-                        && day.month == event.month
-                        && day.day == event.day) {
+                    && day.month == event.month
+                    && day.day == event.day) {
                     imgEventTag.visibility = View.VISIBLE
                     imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
                 }

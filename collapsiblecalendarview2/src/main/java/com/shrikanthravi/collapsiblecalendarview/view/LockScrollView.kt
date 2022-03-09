@@ -14,19 +14,14 @@ class LockScrollView : ScrollView {
     constructor(context: Context) : super(context) {}
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
-    var swipeTouchListener: OnSwipeTouchListener? = null
+    private var swipeTouchListener: OnSwipeTouchListener? = null
     fun setParams(swipeTouchListener: OnSwipeTouchListener){
         this.swipeTouchListener = swipeTouchListener
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         swipeTouchListener?.onTouch(this, ev).let {
-            if(it==null){
-                return false;
-            }
-            else {
-                return it
-            }
+            return it ?: false
         }
     }
 
