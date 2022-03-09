@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter
 import com.shrikanthravi.collapsiblecalendarview.data.Day
@@ -240,13 +241,13 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
                 // set today's item
                 if (isToday(day)) {
-                    txtDay.setBackgroundDrawable(todayItemBackgroundDrawable)
+                    txtDay.background = todayItemBackgroundDrawable
                     txtDay.setTextColor(todayItemTextColor)
                 }
 
                 // set the selected item
                 if (isSelectedDay(day)) {
-                    txtDay.setBackgroundDrawable(selectedItemBackgroundDrawable)
+                    txtDay.background = selectedItemBackgroundDrawable
                     txtDay.setTextColor(selectedItemTextColor)
                 }
             }
@@ -266,7 +267,8 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
             // reset UI
             val dateFormat = SimpleDateFormat(tempDatePattern, getCurrentLocale(context))
             dateFormat.timeZone = mAdapter.calendar.timeZone
-            mTxtTitle.text = dateFormat.format(mAdapter.calendar.time)
+            var date = dateFormat.format(mAdapter.calendar.time)
+            mTxtTitle.text = if (isDateCapitalized) date.substring(0, 1).toUpperCase() + date.substring(1) else date
             mTableHead.removeAllViews()
             mTableBody.removeAllViews()
 

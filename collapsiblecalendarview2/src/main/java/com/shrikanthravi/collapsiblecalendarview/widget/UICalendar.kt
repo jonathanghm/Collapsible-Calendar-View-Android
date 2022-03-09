@@ -43,7 +43,8 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     protected var expandIconView: ExpandIconView
     protected var clEntireTextView: LinearLayout
     protected var mTodayIcon : ImageView
-    var datePattern = "MMMM"
+    var isDateCapitalized: Boolean = false
+    var datePattern = "MMMM YYYY"
         set(value: String) {
             field = value
 
@@ -64,21 +65,16 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
             field = firstDayOfWeek
             reload()
         }
-    var hideArrow = true
-        set(value: Boolean) {
-            field = value
-            hideButton()
-        }
     open var state = STATE_COLLAPSED
         set(state) {
             field = state
 
             if (this.state == STATE_EXPANDED) {
-                mLayoutBtnGroupMonth.visibility = View.VISIBLE
+                //mLayoutBtnGroupMonth.visibility = View.VISIBLE
                 mLayoutBtnGroupWeek.visibility = View.GONE
             }
             if (this.state == STATE_COLLAPSED) {
-                mLayoutBtnGroupMonth.visibility = View.GONE
+                //mLayoutBtnGroupMonth.visibility = View.GONE
                 mLayoutBtnGroupWeek.visibility = View.VISIBLE
             }
         }
@@ -238,7 +234,6 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         //setStyle(attrs.getInt(R.styleable.UICalendar_style, mStyle));
         isShowWeek = attrs.getBoolean(R.styleable.UICalendar_showWeek, isShowWeek)
         firstDayOfWeek = attrs.getInt(R.styleable.UICalendar_firstDayOfWeek, firstDayOfWeek)
-        hideArrow = attrs.getBoolean(R.styleable.UICalendar_hideArrows, hideArrow)
         datePattern = attrs.getString(R.styleable.UICalendar_datePattern).let {
             if (it == null)
                 datePattern

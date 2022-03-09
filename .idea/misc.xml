@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/circle_black_solid_background.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
+        <entry key="collapsiblecalendarview2/src/main/res/drawable/circle_black_solid_background.xml" value="0.1359375" />
+        <entry key="collapsiblecalendarview2/src/main/res/drawable/circle_black_stroke_background.xml" value="0.1359375" />
+        <entry key="collapsiblecalendarview2/src/main/res/drawable/circle_white_solid_background.xml" value="0.1359375" />
+        <entry key="collapsiblecalendarview2/src/main/res/drawable/circle_white_stroke_background.xml" value="0.1359375" />
         <entry key="collapsiblecalendarview2/src/main/res/layout/day_layout.xml" value="0.18568840579710144" />
         <entry key="collapsiblecalendarview2/src/main/res/layout/layout_day_of_week.xml" value="0.23802083333333332" />
+        <entry key="collapsiblecalendarview2/src/main/res/layout/widget_collapsible_calendarview.xml" value="0.23802083333333332" />
       </map>
     </option>
   </component>
