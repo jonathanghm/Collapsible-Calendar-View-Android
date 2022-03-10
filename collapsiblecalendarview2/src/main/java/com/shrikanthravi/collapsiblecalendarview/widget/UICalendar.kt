@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
@@ -99,7 +98,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
             field = todayItemTextColor
             redraw()
         }
-    var todayItemBackgroundDrawable = resources.getDrawable(R.drawable.circle_black_stroke_background)
+    var todayItemBackgroundDrawable = resources.getDrawable(R.drawable.collapsible_calendar_circle_black_stroke_background)
         set(todayItemBackgroundDrawable) {
             field = todayItemBackgroundDrawable
             redraw()
@@ -109,7 +108,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
             field = selectedItemTextColor
             redraw()
         }
-    var selectedItemBackgroundDrawable = resources.getDrawable(R.drawable.circle_black_solid_background)
+    var selectedItemBackgroundDrawable = resources.getDrawable(R.drawable.collapsible_calendar_circle_black_solid_background)
         set(selectedItemBackground) {
             field = selectedItemBackground
             redraw()
@@ -118,7 +117,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     /**
      * This can be used to defined the left icon drawable other than predefined icon
      */
-    var buttonLeftDrawable = resources.getDrawable(R.drawable.left_icon)
+    var buttonLeftDrawable = resources.getDrawable(R.drawable.collapsible_calendar_left_icon)
         set(buttonLeftDrawable) {
             field = buttonLeftDrawable
             mBtnPrevMonth.setImageDrawable(buttonLeftDrawable)
@@ -128,7 +127,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     /**
      *  This can be used to set the drawable for the right icon, other than predefined icon
      */
-    var buttonRightDrawable = resources.getDrawable(R.drawable.right_icon)
+    var buttonRightDrawable = resources.getDrawable(R.drawable.collapsible_calendar_right_icon)
         set(buttonRightDrawable) {
             field = buttonRightDrawable
             mBtnNextMonth.setImageDrawable(buttonRightDrawable)
@@ -191,7 +190,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         mInflater = LayoutInflater.from(context)
 
         // load rootView from xml
-        val rootView = mInflater.inflate(R.layout.widget_collapsible_calendarview, this, true)
+        val rootView = mInflater.inflate(R.layout.collapsible_calendar_widget_collapsible_calendarview, this, true)
 
         // init UI
         mLayoutRoot = rootView.findViewById(R.id.layout_root)
@@ -233,7 +232,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         // set attributes by the values from XML
         //setStyle(attrs.getInt(R.styleable.UICalendar_style, mStyle));
         isShowWeek = attrs.getBoolean(R.styleable.UICalendar_showWeek, isShowWeek)
-        firstDayOfWeek = attrs.getInt(R.styleable.UICalendar_firstDayOfWeek, firstDayOfWeek)
+        firstDayOfWeek = attrs.getInt(R.styleable.UICalendar_collapsibleCalendarFirstDayOfWeek, firstDayOfWeek)
         datePattern = attrs.getString(R.styleable.UICalendar_datePattern).let {
             if (it == null)
                 datePattern
@@ -241,7 +240,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
                 it
             }
         }
-        state = attrs.getInt(R.styleable.UICalendar_state, state)
+        state = attrs.getInt(R.styleable.UICalendar_collapsibleCalendarState, state)
 
         textColor = attrs.getColor(R.styleable.UICalendar_textColor, textColor)
         primaryColor = attrs.getColor(R.styleable.UICalendar_primaryColor, primaryColor)

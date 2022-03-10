@@ -16,10 +16,10 @@
         <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:selectedItem_background="@drawable/circle_black_solid_background"
+            app:selectedItem_background="@drawable/collapsible_calendar_circle_black_solid_background"
             app:selectedItem_textColor="@android:color/white"
             app:todayItem_textColor="@android:color/black"
-            app:todayItem_background="@drawable/circle_black_stroke_background"
+            app:todayItem_background="@drawable/collapsible_calendar_circle_black_stroke_background"
             android:id="@+id/collapsibleCalendarView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

@@ -109,7 +109,7 @@ class CalendarAdapter(context: Context, cal: Calendar) {
 
             val day = Day(numYear, numMonth, numDay)
 
-            val view = mInflater.inflate(R.layout.day_layout, null)
+            val view = mInflater.inflate(R.layout.collapsible_calendar_day_layout, null)
             val txtDay = view.findViewById<View>(R.id.txt_day) as TextView
             val imgEventTag = view.findViewById<View>(R.id.img_event_tag) as ImageView
 

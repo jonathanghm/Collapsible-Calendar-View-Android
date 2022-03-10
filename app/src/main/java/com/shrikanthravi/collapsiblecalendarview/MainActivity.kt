@@ -10,7 +10,6 @@ import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
 
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
-
 import java.util.Calendar
 import java.util.GregorianCalendar
 

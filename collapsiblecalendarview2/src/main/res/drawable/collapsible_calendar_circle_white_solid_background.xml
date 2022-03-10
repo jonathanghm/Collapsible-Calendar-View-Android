@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <solid
-        android:color="@android:color/black" />
+        android:color="@android:color/white" />
     <corners
-        android:radius="@dimen/day_circle_radius" />
+        android:radius="@dimen/collapsible_calendar_day_circle_radius" />
 
 </shape>

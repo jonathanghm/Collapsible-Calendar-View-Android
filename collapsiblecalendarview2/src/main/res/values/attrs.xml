@@ -18,7 +18,7 @@
         <attr name="hideArrows" format="boolean" value="true"/>
         <attr name="datePattern" format="string" value="MMMM"/>
 
-        <attr name="firstDayOfWeek" format="enum">
+        <attr name="collapsibleCalendarFirstDayOfWeek" format="enum">
             <enum name="sunday" value="0" />
             <enum name="monday" value="1" />
             <enum name="tuesday" value="2" />
@@ -28,14 +28,13 @@
             <enum name="saturday" value="6" />
         </attr>
 
-        <attr name="state" format="enum">
+        <attr name="collapsibleCalendarState" format="enum">
             <enum name="expanded" value="0" />
             <enum name="collapsed" value="1" />
         </attr>
 
         <attr name="textColor" format="color" />
         <attr name="primaryColor" format="color" />
-
         <attr name="eventColor" format="color" />
 
 

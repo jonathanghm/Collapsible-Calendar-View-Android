@@ -18,7 +18,6 @@ import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter
 import com.shrikanthravi.collapsiblecalendarview.data.Day
@@ -278,7 +277,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT)
             for (i in 0..6) {
-                val view = mInflater.inflate(R.layout.layout_day_of_week, null)
+                val view = mInflater.inflate(R.layout.collapsible_calendar_layout_day_of_week, null)
                 val txtDayOfWeek = view.findViewById<View>(R.id.txt_day_of_week) as TextView
                 txtDayOfWeek.setText(DateFormatSymbols().getShortWeekdays()[(i + firstDayOfWeek) % 7 + 1])
                 view.layoutParams = TableRow.LayoutParams(
@@ -377,7 +376,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         val cal = mAdapter!!.calendar
         params.let {
             if (it != null && (Calendar.getInstance().get(Calendar.YEAR) * 12 + Calendar.getInstance().get(Calendar.MONTH) + it.prevDays / 30) > (cal.get(Calendar.YEAR) * 12 + cal.get(Calendar.MONTH))) {
-                val myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce)
+                val myAnim = AnimationUtils.loadAnimation(context, R.anim.collapsible_calendar_bounce)
                 val interpolator = BounceAnimator(0.1, 10.0)
                 myAnim.setInterpolator(interpolator)
                 mTableBody.startAnimation(myAnim)
@@ -401,7 +400,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         val cal = mAdapter!!.calendar
         params.let {
             if (it != null && (Calendar.getInstance().get(Calendar.YEAR) * 12 + Calendar.getInstance().get(Calendar.MONTH) + it.nextDaysBlocked / 30) < (cal.get(Calendar.YEAR) * 12 + cal.get(Calendar.MONTH))) {
-                val myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce)
+                val myAnim = AnimationUtils.loadAnimation(context, R.anim.collapsible_calendar_bounce)
                 val interpolator = BounceAnimator(0.1, 10.0)
                 myAnim.setInterpolator(interpolator)
                 mTableBody.startAnimation(myAnim)
