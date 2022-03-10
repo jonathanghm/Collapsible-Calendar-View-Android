@@ -18,7 +18,6 @@ import java.util.*
 import android.os.Build
 
 
-
 @SuppressLint("ClickableViewAccessibility")
 abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ScrollView(context, attrs, defStyleAttr) {
 
@@ -42,11 +41,15 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     protected var expandIconView: ExpandIconView
     protected var clEntireTextView: LinearLayout
     protected var mTodayIcon : ImageView
-    var isDateCapitalized: Boolean = false
-    var datePattern = "MMMM YYYY"
-        set(value: String) {
+    var isDateCapitalized = false
+        set(value) {
             field = value
-
+            reload()
+        }
+    var datePattern = "MMMM YYYY"
+        set(value) {
+            field = value
+            reload()
         }
     // Attributes
     var isShowWeek = true
@@ -233,20 +236,11 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         //setStyle(attrs.getInt(R.styleable.UICalendar_style, mStyle));
         isShowWeek = attrs.getBoolean(R.styleable.UICalendar_showWeek, isShowWeek)
         firstDayOfWeek = attrs.getInt(R.styleable.UICalendar_collapsibleCalendarFirstDayOfWeek, firstDayOfWeek)
-        datePattern = attrs.getString(R.styleable.UICalendar_datePattern).let {
-            if (it == null)
-                datePattern
-            else {
-                it
-            }
-        }
         state = attrs.getInt(R.styleable.UICalendar_collapsibleCalendarState, state)
 
         textColor = attrs.getColor(R.styleable.UICalendar_textColor, textColor)
         primaryColor = attrs.getColor(R.styleable.UICalendar_primaryColor, primaryColor)
-
         eventColor = attrs.getColor(R.styleable.UICalendar_eventColor, eventColor)
-
 
         todayItemTextColor = attrs.getColor(
                 R.styleable.UICalendar_todayItem_textColor, todayItemTextColor)

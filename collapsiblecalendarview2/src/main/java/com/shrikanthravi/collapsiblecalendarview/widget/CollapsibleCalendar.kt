@@ -257,12 +257,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         mAdapter?.let { mAdapter ->
             mAdapter.refresh()
             val calendar = Calendar.getInstance()
-            val tempDatePattern: String
-            if (calendar.get(Calendar.YEAR) != mAdapter.calendar.get(Calendar.YEAR)) {
-                tempDatePattern = "MMMM YYYY"
-            } else {
-                tempDatePattern = datePattern
-            }
+            val tempDatePattern = datePattern
             // reset UI
             val dateFormat = SimpleDateFormat(tempDatePattern, getCurrentLocale(context))
             dateFormat.timeZone = mAdapter.calendar.timeZone
@@ -612,6 +607,14 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         if (mListener != null) {
             mListener!!.onDaySelect()
         }
+    }
+
+    fun changeDatePatternTo(pattern: String) {
+        datePattern = pattern
+    }
+
+    fun capitalizeDateText() {
+        isDateCapitalized = true
     }
 
     fun setStateWithUpdateUI(state: Int) {
