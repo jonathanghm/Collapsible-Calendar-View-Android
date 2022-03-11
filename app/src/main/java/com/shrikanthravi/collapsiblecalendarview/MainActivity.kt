@@ -81,5 +81,18 @@ class MainActivity : AppCompatActivity(){
         collapsibleCalendar.setAdapter(CalendarAdapter(this, Calendar.getInstance()))
         collapsibleCalendar.capitalizeDateText()
         collapsibleCalendar.disableSelectBeforeToday()
+
+
+        // set day of week
+        val dayOfWeekIds = intArrayOf(
+            R.string.sunday,
+            R.string.monday,
+            R.string.tuesday,
+            R.string.wednesday,
+            R.string.thursday,
+            R.string.friday,
+            R.string.saturday
+        )
+        collapsibleCalendar.setCustomNamesForDays(dayOfWeekIds)
     }
 }

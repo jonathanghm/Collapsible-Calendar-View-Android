@@ -33,6 +33,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
     private var disableAfterToday = false
     private var disableBeforeToday = false
+    private var dayOfWeekIds: IntArray = intArrayOf()
 
     override fun changeToToday() {
         val calendar = Calendar.getInstance()
@@ -53,6 +54,11 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
     fun disableSelectBeforeToday() {
         disableBeforeToday = true
+    }
+
+    fun setCustomNamesForDays(names: IntArray){
+        dayOfWeekIds = names
+        reload()
     }
 
     override fun onClick(view: View?) {
@@ -287,7 +293,13 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
             for (i in 0..6) {
                 val view = mInflater.inflate(R.layout.collapsible_calendar_layout_day_of_week, null)
                 val txtDayOfWeek = view.findViewById<View>(R.id.txt_day_of_week) as TextView
-                txtDayOfWeek.setText(DateFormatSymbols().getShortWeekdays()[(i + firstDayOfWeek) % 7 + 1])
+
+                if (dayOfWeekIds.isNotEmpty()){
+                    txtDayOfWeek.text = resources.getString(dayOfWeekIds[(i) % 7])
+                } else {
+                    txtDayOfWeek.text = (DateFormatSymbols().shortWeekdays[(i + firstDayOfWeek) % 7 + 1])
+                }
+
                 view.layoutParams = TableRow.LayoutParams(
                         0,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
