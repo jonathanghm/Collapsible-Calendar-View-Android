@@ -9,6 +9,7 @@
         <entry key="collapsiblecalendarview2/src/main/res/drawable/circle_black_stroke_background.xml" value="0.1359375" />
         <entry key="collapsiblecalendarview2/src/main/res/drawable/circle_white_solid_background.xml" value="0.1359375" />
         <entry key="collapsiblecalendarview2/src/main/res/drawable/circle_white_stroke_background.xml" value="0.1359375" />
+        <entry key="collapsiblecalendarview2/src/main/res/layout/collapsible_calendar_layout_day_of_week.xml" value="0.14322916666666666" />
         <entry key="collapsiblecalendarview2/src/main/res/layout/day_layout.xml" value="0.18568840579710144" />
         <entry key="collapsiblecalendarview2/src/main/res/layout/layout_day_of_week.xml" value="0.23802083333333332" />
         <entry key="collapsiblecalendarview2/src/main/res/layout/widget_collapsible_calendarview.xml" value="0.23802083333333332" />
