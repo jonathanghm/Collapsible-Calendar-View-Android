@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity(){
         var textView = findViewById<TextView>(R.id.tv_date)
 
         collapsibleCalendar = findViewById(R.id.collapsibleCalendarView)
-        //collapsibleCalendar.changeDatePatternTo("yyyy年 MMM")
-        collapsibleCalendar.capitalizeDateText()
+        collapsibleCalendar.changeDatePatternTo("yyyy年 MMM")
+        //collapsibleCalendar.capitalizeDateText()
         relativeLayout.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity){
             override fun onSwipeRight() {
                 collapsibleCalendar.nextDay()

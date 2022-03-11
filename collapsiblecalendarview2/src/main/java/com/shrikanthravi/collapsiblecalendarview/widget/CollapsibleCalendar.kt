@@ -199,6 +199,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
             } else {
                 expand(400)
             }
+            expanded = !expanded
         }
 
         this.post { collapseTo(mCurrentWeekIndex) }
@@ -585,9 +586,9 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
 
                     if (interpolatedTime == 1f) {
                         state = STATE_EXPANDED
-
                         mBtnPrevMonth.isClickable = true
                         mBtnNextMonth.isClickable = true
+                        reload()
                     }
                 }
             }
