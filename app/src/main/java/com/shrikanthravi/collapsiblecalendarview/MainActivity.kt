@@ -1,17 +1,13 @@
 package com.shrikanthravi.collapsiblecalendarview
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ScrollView
 import android.widget.TextView
-import com.shrikanthravi.collapsiblecalendarview.data.Day
-import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
+import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter
 
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
-import java.util.Calendar
-import java.util.GregorianCalendar
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(){
@@ -27,44 +23,29 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
         supportActionBar!!.elevation = 0f
         window.statusBarColor = resources.getColor(R.color.google_red)
-        var relativeLayout = findViewById<ScrollView>(R.id.scrollView)
         var textView = findViewById<TextView>(R.id.tv_date)
 
         collapsibleCalendar = findViewById(R.id.collapsibleCalendarView)
-        collapsibleCalendar.changeDatePatternTo("yyyy年 MMM")
-        //collapsibleCalendar.capitalizeDateText()
-        relativeLayout.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity){
-            override fun onSwipeRight() {
-                collapsibleCalendar.nextDay()
-            }
 
-            override fun onSwipeLeft() {
-                collapsibleCalendar.prevDay()
-            }
-
-            override fun onSwipeTop() {
-                if(collapsibleCalendar.expanded){
-                    collapsibleCalendar.collapse(400)
-                }
-            }
-
-            override fun onSwipeBottom() {
-                if(!collapsibleCalendar.expanded){
-                    collapsibleCalendar.expand(400)
-                }
-            }
-        });
         //To hide or show expand icon
-        collapsibleCalendar.setExpandIconVisible(true)
-        val today = GregorianCalendar()
+        //collapsibleCalendar.setExpandIconVisible(true)
+        //val today = GregorianCalendar()
         //collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
-        today.add(Calendar.DATE, 1)
+        //today.add(Calendar.DATE, 1)
         //collapsibleCalendar.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
         //collapsibleCalendar.addEventTag(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), Color.BLUE)
-        collapsibleCalendar.params = CollapsibleCalendar.Params(0, 100)
+        //collapsibleCalendar.params = CollapsibleCalendar.Params(0, 100)
         collapsibleCalendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener {
             override fun onDayChanged() {
 
+            }
+
+            override fun onDaySelectedMajor() {
+                textView.text = "Can't select a day after today"
+            }
+
+            override fun onDaySelectedMinor() {
+                textView.text = "Can't select a day before today"
             }
 
             override fun onClickListener() {
@@ -97,6 +78,8 @@ class MainActivity : AppCompatActivity(){
             }
         })
 
-
+        collapsibleCalendar.setAdapter(CalendarAdapter(this, Calendar.getInstance()))
+        collapsibleCalendar.capitalizeDateText()
+        collapsibleCalendar.disableSelectBeforeToday()
     }
 }

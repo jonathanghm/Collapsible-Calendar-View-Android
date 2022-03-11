@@ -30,6 +30,10 @@ import java.util.*
 
 
 class CollapsibleCalendar : UICalendar, View.OnClickListener {
+
+    private var disableAfterToday = false
+    private var disableBeforeToday = false
+
     override fun changeToToday() {
         val calendar = Calendar.getInstance()
         val calenderAdapter = CalendarAdapter(context, calendar);
@@ -41,6 +45,14 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         this.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
         mCurrentWeekIndex = suitableRowIndex
         setAdapter(calenderAdapter)
+    }
+
+    fun disableSelectAfterToday() {
+        disableAfterToday = true
+    }
+
+    fun disableSelectBeforeToday() {
+        disableBeforeToday = true
     }
 
     override fun onClick(view: View?) {
@@ -316,6 +328,24 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     }
 
     fun onItemClicked(view: View, day: Day) {
+
+        val date = Calendar.getInstance()
+        date[Calendar.DAY_OF_MONTH] = day.day
+        date[Calendar.MONTH] = day.month
+        date[Calendar.YEAR] = day.year
+
+        if (disableAfterToday) {
+            if (date.time.after(Date())) {
+                if (mListener != null) mListener!!.onDaySelectedMajor()
+                return
+            }
+        } else if (disableBeforeToday) {
+            if (date.time.before(Date())) {
+                if (mListener != null) mListener!!.onDaySelectedMinor()
+                return
+            }
+        }
+
         select(day)
 
         val cal = mAdapter!!.calendar
@@ -652,6 +682,10 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         fun onClickListener()
 
         fun onDayChanged()
+
+        fun onDaySelectedMajor()
+
+        fun onDaySelectedMinor()
     }
 
     fun setExpandIconVisible(visible: Boolean) {
